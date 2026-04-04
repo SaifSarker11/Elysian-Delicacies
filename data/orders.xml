@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<orders>
+    <order>
+        <id>027534a0</id>
+        <customerId>86b87d24</customerId>
+        <customerName>Md. Sazedul Karim Sarker</customerName>
+        <restaurantId>rest001</restaurantId>
+        <restaurantName>Spice Garden</restaurantName>
+        <items>
+            <item>
+                <menuItemId>m001</menuItemId>
+                <menuItemName>Kacchi Biriyani</menuItemName>
+                <quantity>1</quantity>
+                <unitPrice>350.0</unitPrice>
+                <totalPrice>350.0</totalPrice>
+                <selectedAddOns/>
+                <specialInstructions></specialInstructions>
+            </item>
+        </items>
+        <status>PLACED</status>
+        <deliveryAddress>
+            <area>Gulshan</area>
+            <street>Gulshan 2</street>
+            <city>Dhaka</city>
+            <latitude>23.7925</latitude>
+            <longitude>90.4078</longitude>
+        </deliveryAddress>
+        <riderId>rider001</riderId>
+        <riderName>Rashid Hasan</riderName>
+        <subtotal>350.0</subtotal>
+        <discount>175.0</discount>
+        <deliveryFee>50.0</deliveryFee>
+        <total>225.0</total>
+        <couponCode>WELCOME50</couponCode>
+        <createdAt>2026-04-04T14:25:37.8144458</createdAt>
+        <updatedAt>2026-04-04T14:25:37.8144458</updatedAt>
+        <estimatedDelivery>2026-04-04T14:50:37.8276061</estimatedDelivery>
+        <paymentMethod>CARD</paymentMethod>
+    </order>
+    <order>
+        <id>63c09cfd</id>
+        <customerId>cust001</customerId>
+        <customerName>Ahmed Khan</customerName>
+        <restaurantId>rest003</restaurantId>
+        <restaurantName>Dragon Wok</restaurantName>
+        <items>
+            <item>
+                <menuItemId>m012</menuItemId>
+                <menuItemName>Dim Sum Platter</menuItemName>
+                <quantity>1</quantity>
+                <unitPrice>350.0</unitPrice>
+                <totalPrice>350.0</totalPrice>
+                <selectedAddOns/>
+                <specialInstructions></specialInstructions>
+            </item>
+            <item>
+                <menuItemId>m013</menuItemId>
+                <menuItemName>Kung Pao Chicken</menuItemName>
+                <quantity>1</quantity>
+                <unitPrice>320.0</unitPrice>
+                <totalPrice>320.0</totalPrice>
+                <selectedAddOns/>
+                <specialInstructions></specialInstructions>
+            </item>
+            <item>
+                <menuItemId>m015</menuItemId>
+                <menuItemName>Mango Sticky Rice</menuItemName>
+                <quantity>1</quantity>
+                <unitPrice>150.0</unitPrice>
+                <totalPrice>150.0</totalPrice>
+                <selectedAddOns/>
+                <specialInstructions></specialInstructions>
+            </item>
+        </items>
+        <status>PLACED</status>
+        <deliveryAddress>
+            <area>Gulshan</area>
+            <street>Road 11, House 5</street>
+            <city>Dhaka</city>
+            <latitude>23.7925</latitude>
+            <longitude>90.4078</longitude>
+        </deliveryAddress>
+        <riderId>rider002</riderId>
+        <riderName>Imran Ali</riderName>
+        <subtotal>820.0</subtotal>
+        <discount>200.0</discount>
+        <deliveryFee>50.0</deliveryFee>
+        <total>670.0</total>
+        <couponCode>WELCOME50</couponCode>
+        <createdAt>2026-04-04T15:05:48.8314806</createdAt>
+        <updatedAt>2026-04-04T15:05:48.8314806</updatedAt>
+        <estimatedDelivery>2026-04-04T15:35:48.8435069</estimatedDelivery>
+        <paymentMethod>CASH</paymentMethod>
+    </order>
+</orders>

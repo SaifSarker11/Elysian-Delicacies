@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<payments>
+    <payment>
+        <id>de78ae5b</id>
+        <orderId>027534a0</orderId>
+        <amount>225.0</amount>
+        <method>CARD</method>
+        <status>COMPLETED</status>
+        <transactionId>TXN-1775291137881-099F</transactionId>
+        <paidAt>2026-04-04T14:25:37.898144</paidAt>
+    </payment>
+    <payment>
+        <id>58dff1d1</id>
+        <orderId>63c09cfd</orderId>
+        <amount>670.0</amount>
+        <method>CASH</method>
+        <status>COMPLETED</status>
+        <transactionId>TXN-1775293548943-5A4B</transactionId>
+        <paidAt>2026-04-04T15:05:48.9430607</paidAt>
+    </payment>
+</payments>

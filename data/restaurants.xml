@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<restaurants>
+    <restaurant>
+        <id>rest001</id>
+        <ownerId>own001</ownerId>
+        <name>Spice Garden</name>
+        <description>Authentic Bengali cuisine with a modern twist. Famous for biryanis and kebabs.</description>
+        <cuisineType>Bengali</cuisineType>
+        <address>
+            <area>Banani</area>
+            <street>Road 11, Block F</street>
+            <city>Dhaka</city>
+            <latitude>23.7937</latitude>
+            <longitude>90.4066</longitude>
+        </address>
+        <rating>4.5</rating>
+        <totalRatings>0</totalRatings>
+        <openingTime>10:00</openingTime>
+        <closingTime>23:00</closingTime>
+        <isOpen>true</isOpen>
+        <imageUrl>/api/images/restaurant1.jpg</imageUrl>
+        <deliveryFee>40.0</deliveryFee>
+        <estimatedDeliveryMinutes>25</estimatedDeliveryMinutes>
+    </restaurant>
+    <restaurant>
+        <id>rest002</id>
+        <ownerId>own002</ownerId>
+        <name>Pizza Paradise</name>
+        <description>Wood-fired pizzas and Italian favorites. Made with imported ingredients.</description>
+        <cuisineType>Italian</cuisineType>
+        <address>
+            <area>Uttara</area>
+            <street>Sector 7, Road 2</street>
+            <city>Dhaka</city>
+            <latitude>23.8759</latitude>
+            <longitude>90.3795</longitude>
+        </address>
+        <rating>4.3</rating>
+        <totalRatings>0</totalRatings>
+        <openingTime>11:00</openingTime>
+        <closingTime>22:30</closingTime>
+        <isOpen>true</isOpen>
+        <imageUrl>/api/images/restaurant2.jpg</imageUrl>
+        <deliveryFee>50.0</deliveryFee>
+        <estimatedDeliveryMinutes>35</estimatedDeliveryMinutes>
+    </restaurant>
+    <restaurant>
+        <id>rest003</id>
+        <ownerId>own003</ownerId>
+        <name>Dragon Wok</name>
+        <description>Premium Chinese and Thai cuisine. Signature dim sum and noodle dishes.</description>
+        <cuisineType>Chinese</cuisineType>
+        <address>
+            <area>Gulshan</area>
+            <street>Road 135, Circle 2</street>
+            <city>Dhaka</city>
+            <latitude>23.793</latitude>
+            <longitude>90.415</longitude>
+        </address>
+        <rating>4.7</rating>
+        <totalRatings>0</totalRatings>
+        <openingTime>11:30</openingTime>
+        <closingTime>22:00</closingTime>
+        <isOpen>true</isOpen>
+        <imageUrl>/api/images/restaurant3.jpg</imageUrl>
+        <deliveryFee>45.0</deliveryFee>
+        <estimatedDeliveryMinutes>30</estimatedDeliveryMinutes>
+    </restaurant>
+    <restaurant>
+        <id>rest004</id>
+        <ownerId>own001</ownerId>
+        <name>Burger Barn</name>
+        <description>Gourmet burgers, loaded fries, and craft shakes. American comfort food at its best.</description>
+        <cuisineType>American</cuisineType>
+        <address>
+            <area>Dhanmondi</area>
+            <street>Road 27, Block B</street>
+            <city>Dhaka</city>
+            <latitude>23.7461</latitude>
+            <longitude>90.3742</longitude>
+        </address>
+        <rating>4.1</rating>
+        <totalRatings>0</totalRatings>
+        <openingTime>12:00</openingTime>
+        <closingTime>23:30</closingTime>
+        <isOpen>true</isOpen>
+        <imageUrl>/api/images/restaurant4.jpg</imageUrl>
+        <deliveryFee>35.0</deliveryFee>
+        <estimatedDeliveryMinutes>20</estimatedDeliveryMinutes>
+    </restaurant>
+    <restaurant>
+        <id>rest005</id>
+        <ownerId>own002</ownerId>
+        <name>Sushi Sensation</name>
+        <description>Fresh sushi rolls, sashimi, and Japanese delicacies. Premium dining experience.</description>
+        <cuisineType>Japanese</cuisineType>
+        <address>
+            <area>Gulshan</area>
+            <street>Road 11, House 15</street>
+            <city>Dhaka</city>
+            <latitude>23.7925</latitude>
+            <longitude>90.4078</longitude>
+        </address>
+        <rating>4.8</rating>
+        <totalRatings>0</totalRatings>
+        <openingTime>12:00</openingTime>
+        <closingTime>21:30</closingTime>
+        <isOpen>true</isOpen>
+        <imageUrl>/api/images/restaurant5.jpg</imageUrl>
+        <deliveryFee>60.0</deliveryFee>
+        <estimatedDeliveryMinutes>40</estimatedDeliveryMinutes>
+    </restaurant>
+</restaurants>

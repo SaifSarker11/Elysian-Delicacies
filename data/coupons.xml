@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<coupons>
+    <coupon>
+        <code>WELCOME50</code>
+        <description>50% off on your first order!</description>
+        <discountPercent>50.0</discountPercent>
+        <maxDiscount>200.0</maxDiscount>
+        <minOrderAmount>100.0</minOrderAmount>
+        <validUntil>2026-12-31</validUntil>
+        <active>true</active>
+    </coupon>
+    <coupon>
+        <code>SAVE20</code>
+        <description>20% off on orders above 500</description>
+        <discountPercent>20.0</discountPercent>
+        <maxDiscount>150.0</maxDiscount>
+        <minOrderAmount>500.0</minOrderAmount>
+        <validUntil>2026-12-31</validUntil>
+        <active>true</active>
+    </coupon>
+    <coupon>
+        <code>FREEDEL</code>
+        <description>Free delivery on orders above 300</description>
+        <discountPercent>100.0</discountPercent>
+        <maxDiscount>60.0</maxDiscount>
+        <minOrderAmount>300.0</minOrderAmount>
+        <validUntil>2026-06-30</validUntil>
+        <active>true</active>
+    </coupon>
+    <coupon>
+        <code>FEAST15</code>
+        <description>15% off on all orders</description>
+        <discountPercent>15.0</discountPercent>
+        <maxDiscount>100.0</maxDiscount>
+        <minOrderAmount>200.0</minOrderAmount>
+        <validUntil>2026-12-31</validUntil>
+        <active>true</active>
+    </coupon>
+</coupons>

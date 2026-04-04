@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<riders>
+    <rider>
+        <id>rider001</id>
+        <userId>r1</userId>
+        <name>Rashid Hasan</name>
+        <phone>+8801766666666</phone>
+        <vehicleType>Motorcycle</vehicleType>
+        <available>false</available>
+        <currentArea>Gulshan</currentArea>
+        <rating>4.5</rating>
+    </rider>
+    <rider>
+        <id>rider002</id>
+        <userId>r2</userId>
+        <name>Imran Ali</name>
+        <phone>+8801777777777</phone>
+        <vehicleType>Motorcycle</vehicleType>
+        <available>false</available>
+        <currentArea>Banani</currentArea>
+        <rating>4.5</rating>
+    </rider>
+    <rider>
+        <id>rider003</id>
+        <userId>r3</userId>
+        <name>Jamal Uddin</name>
+        <phone>+8801788888888</phone>
+        <vehicleType>Bicycle</vehicleType>
+        <available>true</available>
+        <currentArea>Dhanmondi</currentArea>
+        <rating>4.5</rating>
+    </rider>
+    <rider>
+        <id>rider004</id>
+        <userId>r4</userId>
+        <name>Sumon Ahmed</name>
+        <phone>+8801799999999</phone>
+        <vehicleType>Motorcycle</vehicleType>
+        <available>true</available>
+        <currentArea>Uttara</currentArea>
+        <rating>4.5</rating>
+    </rider>
+    <rider>
+        <id>rider005</id>
+        <userId>r5</userId>
+        <name>Kabir Khan</name>
+        <phone>+8801700000000</phone>
+        <vehicleType>Motorcycle</vehicleType>
+        <available>true</available>
+        <currentArea>Gulshan</currentArea>
+        <rating>4.5</rating>
+    </rider>
+</riders>

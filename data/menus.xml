@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<menuItems>
+    <menuItem>
+        <id>m001</id>
+        <restaurantId>rest001</restaurantId>
+        <name>Kacchi Biriyani</name>
+        <description>Aromatic traditional Dhaka-style kacchi with tender goat meat</description>
+        <price>350.0</price>
+        <category>Main Course</category>
+        <available>true</available>
+        <quantity>49</quantity>
+        <addOns>
+            <addOn>
+                <id>a1</id>
+                <name>Extra Meat</name>
+                <price>100.0</price>
+            </addOn>
+            <addOn>
+                <id>a2</id>
+                <name>Borhani</name>
+                <price>30.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m002</id>
+        <restaurantId>rest001</restaurantId>
+        <name>Chicken Reshmi Kebab</name>
+        <description>Smoky grilled chicken kebabs marinated in special spices</description>
+        <price>220.0</price>
+        <category>Appetizer</category>
+        <available>true</available>
+        <quantity>40</quantity>
+        <addOns>
+            <addOn>
+                <id>a3</id>
+                <name>Extra Sauce</name>
+                <price>20.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m003</id>
+        <restaurantId>rest001</restaurantId>
+        <name>Mutton Curry</name>
+        <description>Slow-cooked mutton in rich Bengali gravy</description>
+        <price>400.0</price>
+        <category>Main Course</category>
+        <available>true</available>
+        <quantity>30</quantity>
+        <addOns>
+            <addOn>
+                <id>a4</id>
+                <name>Extra Rice</name>
+                <price>40.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m004</id>
+        <restaurantId>rest001</restaurantId>
+        <name>Firni</name>
+        <description>Creamy rice pudding with pistachios</description>
+        <price>80.0</price>
+        <category>Dessert</category>
+        <available>true</available>
+        <quantity>60</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m005</id>
+        <restaurantId>rest001</restaurantId>
+        <name>Mango Lassi</name>
+        <description>Fresh mango yogurt smoothie</description>
+        <price>60.0</price>
+        <category>Beverages</category>
+        <available>true</available>
+        <quantity>100</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m006</id>
+        <restaurantId>rest002</restaurantId>
+        <name>Margherita Pizza</name>
+        <description>Classic pizza with fresh mozzarella and basil</description>
+        <price>450.0</price>
+        <category>Pizza</category>
+        <available>true</available>
+        <quantity>30</quantity>
+        <addOns>
+            <addOn>
+                <id>a5</id>
+                <name>Extra Cheese</name>
+                <price>60.0</price>
+            </addOn>
+            <addOn>
+                <id>a6</id>
+                <name>Jalapenos</name>
+                <price>30.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m007</id>
+        <restaurantId>rest002</restaurantId>
+        <name>Pepperoni Feast</name>
+        <description>Loaded pepperoni pizza with double cheese</description>
+        <price>550.0</price>
+        <category>Pizza</category>
+        <available>true</available>
+        <quantity>25</quantity>
+        <addOns>
+            <addOn>
+                <id>a7</id>
+                <name>Stuffed Crust</name>
+                <price>80.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m008</id>
+        <restaurantId>rest002</restaurantId>
+        <name>Garlic Bread</name>
+        <description>Crispy garlic bread with herb butter</description>
+        <price>150.0</price>
+        <category>Appetizer</category>
+        <available>true</available>
+        <quantity>50</quantity>
+        <addOns>
+            <addOn>
+                <id>a8</id>
+                <name>Cheese Dip</name>
+                <price>40.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m009</id>
+        <restaurantId>rest002</restaurantId>
+        <name>Pasta Alfredo</name>
+        <description>Creamy fettuccine alfredo with grilled chicken</description>
+        <price>380.0</price>
+        <category>Pasta</category>
+        <available>true</available>
+        <quantity>20</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m010</id>
+        <restaurantId>rest002</restaurantId>
+        <name>Tiramisu</name>
+        <description>Classic Italian coffee-flavored dessert</description>
+        <price>200.0</price>
+        <category>Dessert</category>
+        <available>true</available>
+        <quantity>15</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m011</id>
+        <restaurantId>rest003</restaurantId>
+        <name>Chicken Fried Rice</name>
+        <description>Wok-tossed fried rice with chicken and vegetables</description>
+        <price>280.0</price>
+        <category>Rice</category>
+        <available>true</available>
+        <quantity>40</quantity>
+        <addOns>
+            <addOn>
+                <id>a9</id>
+                <name>Extra Egg</name>
+                <price>25.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m012</id>
+        <restaurantId>rest003</restaurantId>
+        <name>Dim Sum Platter</name>
+        <description>Assorted steamed dumplings (8 pcs)</description>
+        <price>350.0</price>
+        <category>Appetizer</category>
+        <available>true</available>
+        <quantity>19</quantity>
+        <addOns>
+            <addOn>
+                <id>a10</id>
+                <name>Soy Chili Sauce</name>
+                <price>15.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m013</id>
+        <restaurantId>rest003</restaurantId>
+        <name>Kung Pao Chicken</name>
+        <description>Spicy stir-fried chicken with peanuts</description>
+        <price>320.0</price>
+        <category>Main Course</category>
+        <available>true</available>
+        <quantity>34</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m014</id>
+        <restaurantId>rest003</restaurantId>
+        <name>Thai Green Curry</name>
+        <description>Coconut green curry with vegetables and chicken</description>
+        <price>380.0</price>
+        <category>Main Course</category>
+        <available>true</available>
+        <quantity>25</quantity>
+        <addOns>
+            <addOn>
+                <id>a11</id>
+                <name>Jasmine Rice</name>
+                <price>50.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m015</id>
+        <restaurantId>rest003</restaurantId>
+        <name>Mango Sticky Rice</name>
+        <description>Sweet glutinous rice with fresh mango</description>
+        <price>150.0</price>
+        <category>Dessert</category>
+        <available>true</available>
+        <quantity>29</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m016</id>
+        <restaurantId>rest004</restaurantId>
+        <name>Classic Smash Burger</name>
+        <description>Double smashed patty with cheese and special sauce</description>
+        <price>300.0</price>
+        <category>Burgers</category>
+        <available>true</available>
+        <quantity>50</quantity>
+        <addOns>
+            <addOn>
+                <id>a12</id>
+                <name>Extra Patty</name>
+                <price>120.0</price>
+            </addOn>
+            <addOn>
+                <id>a13</id>
+                <name>Bacon</name>
+                <price>60.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m017</id>
+        <restaurantId>rest004</restaurantId>
+        <name>Loaded Fries</name>
+        <description>Crispy fries with cheese, jalapenos and sour cream</description>
+        <price>180.0</price>
+        <category>Sides</category>
+        <available>true</available>
+        <quantity>60</quantity>
+        <addOns>
+            <addOn>
+                <id>a14</id>
+                <name>Truffle Oil</name>
+                <price>40.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m018</id>
+        <restaurantId>rest004</restaurantId>
+        <name>BBQ Chicken Burger</name>
+        <description>Grilled chicken with BBQ sauce and coleslaw</description>
+        <price>280.0</price>
+        <category>Burgers</category>
+        <available>true</available>
+        <quantity>40</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m019</id>
+        <restaurantId>rest004</restaurantId>
+        <name>Oreo Milkshake</name>
+        <description>Thick milkshake blended with Oreo cookies</description>
+        <price>160.0</price>
+        <category>Beverages</category>
+        <available>true</available>
+        <quantity>45</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m020</id>
+        <restaurantId>rest004</restaurantId>
+        <name>Chicken Wings</name>
+        <description>Crispy buffalo wings with ranch dip (6 pcs)</description>
+        <price>250.0</price>
+        <category>Appetizer</category>
+        <available>true</available>
+        <quantity>35</quantity>
+        <addOns>
+            <addOn>
+                <id>a15</id>
+                <name>Extra Ranch</name>
+                <price>20.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m021</id>
+        <restaurantId>rest005</restaurantId>
+        <name>California Roll</name>
+        <description>Crab, avocado and cucumber maki (8 pcs)</description>
+        <price>420.0</price>
+        <category>Sushi</category>
+        <available>true</available>
+        <quantity>20</quantity>
+        <addOns>
+            <addOn>
+                <id>a16</id>
+                <name>Extra Wasabi</name>
+                <price>10.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m022</id>
+        <restaurantId>rest005</restaurantId>
+        <name>Salmon Sashimi</name>
+        <description>Fresh Norwegian salmon slices (6 pcs)</description>
+        <price>580.0</price>
+        <category>Sashimi</category>
+        <available>true</available>
+        <quantity>15</quantity>
+        <addOns/>
+    </menuItem>
+    <menuItem>
+        <id>m023</id>
+        <restaurantId>rest005</restaurantId>
+        <name>Tempura Platter</name>
+        <description>Assorted prawn and vegetable tempura</description>
+        <price>450.0</price>
+        <category>Appetizer</category>
+        <available>true</available>
+        <quantity>20</quantity>
+        <addOns>
+            <addOn>
+                <id>a17</id>
+                <name>Tentsuyu Sauce</name>
+                <price>25.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m024</id>
+        <restaurantId>rest005</restaurantId>
+        <name>Ramen Bowl</name>
+        <description>Rich tonkotsu ramen with chashu pork</description>
+        <price>400.0</price>
+        <category>Noodles</category>
+        <available>true</available>
+        <quantity>25</quantity>
+        <addOns>
+            <addOn>
+                <id>a18</id>
+                <name>Extra Noodles</name>
+                <price>50.0</price>
+            </addOn>
+            <addOn>
+                <id>a19</id>
+                <name>Soft Boiled Egg</name>
+                <price>30.0</price>
+            </addOn>
+        </addOns>
+    </menuItem>
+    <menuItem>
+        <id>m025</id>
+        <restaurantId>rest005</restaurantId>
+        <name>Matcha Ice Cream</name>
+        <description>Traditional Japanese green tea ice cream</description>
+        <price>120.0</price>
+        <category>Dessert</category>
+        <available>true</available>
+        <quantity>40</quantity>
+        <addOns/>
+    </menuItem>
+</menuItems>

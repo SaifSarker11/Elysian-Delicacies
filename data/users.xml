@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <user>
+        <id>cust001</id>
+        <name>Ahmed Khan</name>
+        <email>ahmed@email.com</email>
+        <password>ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</password>
+        <phone>+8801711111111</phone>
+        <role>CUSTOMER</role>
+        <address>
+            <area>Gulshan</area>
+            <street>Road 11, House 5</street>
+            <city>Dhaka</city>
+            <latitude>23.7925</latitude>
+            <longitude>90.4078</longitude>
+        </address>
+    </user>
+    <user>
+        <id>cust002</id>
+        <name>Sara Rahman</name>
+        <email>sara@email.com</email>
+        <password>ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</password>
+        <phone>+8801722222222</phone>
+        <role>CUSTOMER</role>
+        <address>
+            <area>Dhanmondi</area>
+            <street>Road 27, Block A</street>
+            <city>Dhaka</city>
+            <latitude>23.7461</latitude>
+            <longitude>90.3742</longitude>
+        </address>
+    </user>
+    <user>
+        <id>own001</id>
+        <name>Karim Ali</name>
+        <email>karim@email.com</email>
+        <password>ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</password>
+        <phone>+8801733333333</phone>
+        <role>RESTAURANT_OWNER</role>
+        <address>
+            <area>Banani</area>
+            <street>Road 11</street>
+            <city>Dhaka</city>
+            <latitude>23.7937</latitude>
+            <longitude>90.4066</longitude>
+        </address>
+    </user>
+    <user>
+        <id>own002</id>
+        <name>Fatima Begum</name>
+        <email>fatima@email.com</email>
+        <password>ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</password>
+        <phone>+8801744444444</phone>
+        <role>RESTAURANT_OWNER</role>
+        <address>
+            <area>Uttara</area>
+            <street>Sector 7</street>
+            <city>Dhaka</city>
+            <latitude>23.8759</latitude>
+            <longitude>90.3795</longitude>
+        </address>
+    </user>
+    <user>
+        <id>own003</id>
+        <name>Rahim Uddin</name>
+        <email>rahim@email.com</email>
+        <password>ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</password>
+        <phone>+8801755555555</phone>
+        <role>RESTAURANT_OWNER</role>
+        <address>
+            <area>Gulshan</area>
+            <street>Road 135</street>
+            <city>Dhaka</city>
+            <latitude>23.793</latitude>
+            <longitude>90.415</longitude>
+        </address>
+    </user>
+    <user>
+        <id>86b87d24</id>
+        <name>Md. Sazedul Karim Sarker</name>
+        <email>sazdulkarim@yahoo.com</email>
+        <password>be176895fd31eb8f182166a5564e13aaf030175f666a8e0c981db6124f37433b</password>
+        <phone>+8801712223635</phone>
+        <role>CUSTOMER</role>
+        <address>
+            <area>Gulshan</area>
+            <street></street>
+            <city>Dhaka</city>
+            <latitude>23.7925</latitude>
+            <longitude>90.4078</longitude>
+        </address>
+    </user>
+</users>
