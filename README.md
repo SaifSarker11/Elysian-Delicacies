@@ -657,6 +657,9 @@ Use these coupon codes during checkout to get discounts:
 
 This project was built as an academic assignment for **OOC II** coursework.
 
-##Credits
+## Credits
 
-Claude's Opus 4.6, and Sonnect 4.6, Gemini 3.1 Pro
+1. Claude's Opus 4.6
+2. Claude's Sonnect 4.6
+3. Gemini 3.1 Pro
+I was a vibe coder in this project as I'm a newbie to JS
