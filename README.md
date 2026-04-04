@@ -144,7 +144,7 @@ The application uses **two ports**. Make sure they are not occupied by other pro
 Open **Command Prompt**, **PowerShell**, or **Windows Terminal** and navigate to the project root directory:
 
 ```powershell
-cd "C:\Users\HP\OneDrive\Desktop\OOC II Assignment"
+cd "C:\Users\HP\OneDrive\Desktop\OOC II Assignment\Elysian-Delicacies"
 ```
 
 > Replace the path above with the actual location of the project folder on your machine.
@@ -622,6 +622,7 @@ Use these coupon codes during checkout to get discounts:
   ```
 
   **⚡ One-liner to clear ports AND launch the app immediately (recommended):**
+  Make sure you are inside the `Elysian-Delicacies` directory before running this command:
   ```powershell
   @(8080, 8081) | ForEach-Object { $port = $_; netstat -ano | Select-String ":$port " | ForEach-Object { ($_ -split '\s+')[-1] } | Where-Object { $_ -match '^\d+$' } | Select-Object -Unique | ForEach-Object { taskkill /PID $_ /F } }; .\tools\apache-maven-3.9.8\bin\mvn.cmd exec:exec
   ```
