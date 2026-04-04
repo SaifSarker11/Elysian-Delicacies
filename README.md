@@ -656,3 +656,7 @@ Use these coupon codes during checkout to get discounts:
 ## License
 
 This project was built as an academic assignment for **OOC II** coursework.
+
+##Credits
+
+Claude's Opus 4.6, and Sonnect 4.6, Gemini 3.1 Pro
