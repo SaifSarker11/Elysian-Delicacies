@@ -92,4 +92,38 @@
         <estimatedDelivery>2026-04-04T15:35:48.8435069</estimatedDelivery>
         <paymentMethod>CASH</paymentMethod>
     </order>
+    <order>
+        <id>e4cba8f8</id>
+        <customerId>6f238d43</customerId>
+        <restaurantId>rest003</restaurantId>
+        <restaurantName>Dragon Wok</restaurantName>
+        <items>
+            <item>
+                <menuItemId>m012</menuItemId>
+                <menuItemName>Dim Sum Platter</menuItemName>
+                <quantity>1</quantity>
+                <unitPrice>350.0</unitPrice>
+                <totalPrice>350.0</totalPrice>
+                <selectedAddOns/>
+                <specialInstructions></specialInstructions>
+            </item>
+        </items>
+        <status>PLACED</status>
+        <deliveryAddress>
+            <area>Gulshan 2</area>
+            <street>F-1 Duplex Quarter</street>
+            <city>Savar, Dhaka</city>
+            <latitude>23.7925</latitude>
+            <longitude>90.4078</longitude>
+        </deliveryAddress>
+        <riderId>rider003</riderId>
+        <riderName>Jamal Uddin</riderName>
+        <subtotal>350.0</subtotal>
+        <discount>0.0</discount>
+        <deliveryFee>50.0</deliveryFee>
+        <total>400.0</total>
+        <createdAt>2026-11-21T21:19:23.226419</createdAt>
+        <updatedAt>2026-11-21T21:19:23.226419</updatedAt>
+        <estimatedDelivery>2026-11-21T21:49:23.229255</estimatedDelivery>
+    </order>
 </orders>

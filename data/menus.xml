@@ -181,7 +181,7 @@
         <price>350.0</price>
         <category>Appetizer</category>
         <available>true</available>
-        <quantity>19</quantity>
+        <quantity>18</quantity>
         <addOns>
             <addOn>
                 <id>a10</id>

@@ -26,7 +26,7 @@
         <name>Jamal Uddin</name>
         <phone>+8801788888888</phone>
         <vehicleType>Bicycle</vehicleType>
-        <available>true</available>
+        <available>false</available>
         <currentArea>Dhanmondi</currentArea>
         <rating>4.5</rating>
     </rider>

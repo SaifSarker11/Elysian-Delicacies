@@ -90,4 +90,19 @@
             <longitude>90.4078</longitude>
         </address>
     </user>
+    <user>
+        <id>6f238d43</id>
+        <name>Md Saif Al Sarker</name>
+        <email>msasarker2016@gmail.com</email>
+        <password>97e0c0b9983e39a4a45038d180a476976306cff1fa8eea59ecfc53a8a9ccf802</password>
+        <phone>+8801766086386</phone>
+        <role>CUSTOMER</role>
+        <address>
+            <area></area>
+            <street></street>
+            <city>Savar, Dhaka</city>
+            <latitude>23.7925</latitude>
+            <longitude>90.4078</longitude>
+        </address>
+    </user>
 </users>
