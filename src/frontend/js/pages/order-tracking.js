@@ -1,35 +1,75 @@
 const OrderTrackingPage = {
+    pollInterval: null,
+    currentOrderId: null,
+
     async render(orderId) {
+        this.currentOrderId = orderId;
+        clearInterval(this.pollInterval);
+
         const main = document.getElementById('main-content');
         main.innerHTML = '<div class="loading-spinner" style="padding-top:140px"><div class="spinner"></div></div>';
 
+        await this.loadOrderData(orderId, true);
+
+        // Auto-refresh order status in the background every 8 seconds
+        this.pollInterval = setInterval(() => {
+            if (App.currentPage && App.currentPage.startsWith('tracking')) {
+                this.loadOrderData(this.currentOrderId, false);
+            } else {
+                clearInterval(this.pollInterval);
+            }
+        }, 8000);
+    },
+
+    async loadOrderData(orderId, isInitialLoad = false) {
         try {
             const data = await API.getOrder(orderId);
             const order = data.order;
 
             const steps = [
-                { status: 'PLACED', label: 'Order Received', desc: 'Order details sent to kitchen' },
-                { status: 'CONFIRMED', label: 'Kitchen Confirmed', desc: 'Chef accepted the order' },
-                { status: 'PREPARING', label: 'Food in Preparation', desc: 'Dishes are being cooked fresh' },
-                { status: 'READY', label: 'Packaging Complete', desc: 'Thermal sealing and inspection' },
-                { status: 'PICKED_UP', label: 'Courier On The Way', desc: 'Assigned rider has picked up parcel' },
-                { status: 'DELIVERED', label: 'Delivered', desc: 'Arrived at your location' }
+                { status: 'PLACED', label: 'Order Received', desc: 'Order details sent to kitchen', actionLabel: 'Kitchen: Confirm Order' },
+                { status: 'CONFIRMED', label: 'Kitchen Confirmed', desc: 'Chef accepted the order', actionLabel: 'Kitchen: Start Cooking' },
+                { status: 'PREPARING', label: 'Food in Preparation', desc: 'Dishes are being cooked fresh', actionLabel: 'Kitchen: Finish Packaging' },
+                { status: 'READY', label: 'Packaging Complete', desc: 'Thermal sealing and inspection', actionLabel: 'Dispatch: Hand to Courier' },
+                { status: 'PICKED_UP', label: 'Courier On The Way', desc: 'Assigned rider has picked up parcel', actionLabel: 'Courier: Confirm Delivery' },
+                { status: 'DELIVERED', label: 'Delivered', desc: 'Arrived at your location', actionLabel: null }
             ];
 
             const statusOrder = steps.map(s => s.status);
             const currentIndex = statusOrder.indexOf(order.status);
             const isCancelled = order.status === 'CANCELLED';
+            const nextStep = currentIndex < steps.length - 1 ? steps[currentIndex + 1] : null;
+
+            const main = document.getElementById('main-content');
+            if (!main) return;
 
             main.innerHTML = `
                 <div class="container section">
-                    <button class="btn btn-outline btn-sm" onclick="App.navigate('dashboard')" style="margin-bottom:20px">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-                        Dashboard
-                    </button>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+                        <button class="btn btn-outline btn-sm" onclick="OrderTrackingPage.cleanup(); App.navigate('dashboard')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to Dashboard
+                        </button>
+
+                        <!-- Live Dispatch Simulation Bar: Progress Steps 2 through 6 -->
+                        <div style="display:flex;align-items:center;gap:10px;background:var(--bg-surface-soft);padding:6px 14px;border-radius:var(--radius-full);border:1px solid var(--border-subtle)">
+                            <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:700;color:var(--ink-secondary)">
+                                <span class="status-dot open" style="width:8px;height:8px"></span>
+                                Live Dispatch Flow
+                            </span>
+                            ${nextStep ? `
+                                <button class="btn btn-primary btn-sm" style="padding:4px 12px;font-size:0.78rem" onclick="OrderTrackingPage.advanceStatus('${order.id}', '${nextStep.status}')">
+                                    Simulate Next Step: ${nextStep.label} →
+                                </button>
+                            ` : `
+                                <span class="badge badge-success" style="font-size:0.75rem">Order Completed</span>
+                            `}
+                        </div>
+                    </div>
                     
                     <div style="margin-bottom:28px">
-                        <div class="section-eyebrow">Real-Time Dispatch</div>
-                        <h1 class="section-heading-editorial">${isCancelled ? 'Order Cancelled' : 'Delivery Status'}</h1>
+                        <div class="section-eyebrow">Real-Time Dispatch Tracker</div>
+                        <h1 class="section-heading-editorial">${isCancelled ? 'Order Cancelled' : 'Live Delivery Status'}</h1>
                         <p class="section-desc-editorial" style="margin-bottom:0">Order #${order.id} ${order.restaurantName ? '· ' + order.restaurantName : ''}</p>
                     </div>
 
@@ -51,9 +91,16 @@ const OrderTrackingPage = {
                                                 <div class="timeline-step ${cls}">
                                                     <div class="timeline-dot">${dotContent}</div>
                                                     <div class="timeline-content">
-                                                        <h4>${step.label}</h4>
+                                                        <div style="display:flex;justify-content:space-between;align-items:center">
+                                                            <h4>${step.label}</h4>
+                                                            ${i === currentIndex && nextStep ? `
+                                                                <button class="btn btn-outline btn-sm" style="font-size:0.75rem;padding:3px 9px" onclick="OrderTrackingPage.advanceStatus('${order.id}', '${nextStep.status}')">
+                                                                    Advance Step →
+                                                                </button>
+                                                            ` : ''}
+                                                        </div>
                                                         <p>${step.desc}</p>
-                                                        ${i === currentIndex ? '<div class="time">In Progress</div>' : ''}
+                                                        ${i === currentIndex ? '<div class="time">Currently in progress</div>' : ''}
                                                     </div>
                                                 </div>
                                             `;
@@ -90,13 +137,40 @@ const OrderTrackingPage = {
                                         <div style="font-size:0.88rem;color:var(--ink-primary);line-height:1.4">${order.deliveryAddress.street ? order.deliveryAddress.street + ', ' : ''}${order.deliveryAddress.area || ''}, ${order.deliveryAddress.city || ''}</div>
                                     </div>
                                 ` : ''}
+
+                                <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-hairline);display:flex;flex-direction:column;gap:8px">
+                                    <button class="btn btn-secondary btn-block btn-sm" onclick="OrderTrackingPage.loadOrderData('${order.id}', false)">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                                        Check Live Status
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             `;
         } catch (err) {
-            main.innerHTML = `<div class="container section"><div class="empty-state"><p class="empty-text">${err.message}</p><button class="btn btn-primary" onclick="App.navigate('dashboard')">Go to Dashboard</button></div></div>`;
+            const main = document.getElementById('main-content');
+            if (main) {
+                main.innerHTML = `<div class="container section"><div class="empty-state"><p class="empty-text">${err.message}</p><button class="btn btn-primary" onclick="App.navigate('dashboard')">Go to Dashboard</button></div></div>`;
+            }
+        }
+    },
+
+    async advanceStatus(orderId, newStatus) {
+        try {
+            await API.updateOrderStatus(orderId, newStatus);
+            showToast(`Order status updated to: ${newStatus}`, 'success');
+            await this.loadOrderData(orderId, false);
+        } catch (err) {
+            showToast(err.message, 'error');
+        }
+    },
+
+    cleanup() {
+        if (this.pollInterval) {
+            clearInterval(this.pollInterval);
+            this.pollInterval = null;
         }
     },
 
