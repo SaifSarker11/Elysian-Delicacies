@@ -20,6 +20,9 @@ WORKDIR /app
 # Copy persistent XML data directory
 COPY data ./data
 
+# Copy frontend assets to filesystem (guarantees StaticFileHandler finds them)
+COPY src/frontend ./src/frontend
+
 # Copy built application jar from build stage
 COPY --from=build /app/target/food-delivery-app-1.0.0.jar app.jar
 
