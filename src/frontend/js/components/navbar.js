@@ -1,89 +1,157 @@
+const EMBLEM = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.7 6.6 4.4 10.3 12 12-7.6 1.7-11.3 5.4-12 12-.7-6.6-4.4-10.3-12-12 7.6-1.7 11.3-5.4 12-12z"/></svg>';
+const ICON_SEARCH = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+const ICON_CART = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';
+const ICON_CLOSE = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
 const Navbar = {
+    links() {
+        if (!Session.isLoggedIn()) return [['home', 'Home'], ['restaurants', 'Kitchens'], ['register-restaurant', 'Become a Partner']];
+        if (Session.isOwner()) return [['owner-dashboard', 'Dashboard'], ['register-restaurant', 'Add Kitchen']];
+        return [['dashboard', 'Home'], ['restaurants', 'Kitchens']];
+    },
+
     render() {
         const nav = document.getElementById('navbar');
         const user = Session.getUser();
-        const cartCount = Cart.getCount();
+        const count = Cart.getCount();
+        const homeRoute = user ? (Session.isOwner() ? 'owner-dashboard' : 'dashboard') : 'home';
+        const customer = user && !Session.isOwner();
 
         nav.innerHTML = `
-            <div class="navbar-inner">
-                <div class="navbar-brand" onclick="App.navigate('${user ? (Session.isOwner() ? 'owner-dashboard' : 'dashboard') : 'home'}')">
-                    <span class="brand-mark">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-                    </span>
-                    <span class="brand-text">Elysian Delicacies</span>
+            <div class="hdr-inner">
+                <div class="hdr-brand" onclick="App.navigate('${homeRoute}')">
+                    <span class="hdr-emblem">${EMBLEM}</span>
+                    <span class="hdr-wordmark">Elysian Delicacies</span>
                 </div>
-                ${user ? this.getLoggedInNav(user, cartCount) : this.getGuestNav()}
-            </div>
-        `;
-    },
-
-    getGuestNav() {
-        return `
-            <div class="navbar-links">
-                <span class="navbar-link ${App.currentPage === 'home' ? 'active' : ''}" onclick="App.navigate('home')">Home</span>
-                <span class="navbar-link ${App.currentPage === 'restaurants' ? 'active' : ''}" onclick="App.navigate('restaurants')">Kitchens</span>
-                <span class="navbar-link nav-cta-link" onclick="App.navigate('home')">Sign In / Register</span>
-            </div>
-        `;
-    },
-
-    getLoggedInNav(user, cartCount) {
-        if (Session.isOwner()) {
-            return `
-                <div class="navbar-links">
-                    <span class="navbar-link ${App.currentPage === 'owner-dashboard' ? 'active' : ''}" onclick="App.navigate('owner-dashboard')">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                        Dashboard
-                    </span>
-                    <span class="navbar-link ${App.currentPage === 'register-restaurant' ? 'active' : ''}" onclick="App.navigate('register-restaurant')">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                        Add Kitchen
-                    </span>
+                <div class="hdr-links">
+                    ${this.links().map(([r, t]) => `<span class="hdr-link ${App.currentPage === r ? 'active' : ''}" onclick="App.navigate('${r}')">${t}</span>`).join('')}
                 </div>
-                <div style="display:flex;align-items:center;gap:12px">
-                    <div class="navbar-user" onclick="Session.clear(); App.navigate('home'); showToast('Signed out successfully', 'info');" title="Click to Sign Out">
-                        <div class="user-avatar">${user.name.charAt(0).toUpperCase()}</div>
-                        <span class="user-name">${user.name}</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                    </div>
+                <div class="hdr-actions">
+                    <button class="hdr-btn" aria-label="Search kitchens" onclick="SearchOverlay.open()">${ICON_SEARCH}</button>
+                    ${customer ? `<button class="hdr-btn cart-badge-new" id="cart-nav-badge" aria-label="Order" onclick="App.navigate('cart')">${ICON_CART}${count > 0 ? `<span class="count">${count}</span>` : ''}</button>` : ''}
+                    ${user
+                        ? `<button class="hdr-btn hide-sm" title="Sign out" onclick="Session.clear(); Cart.clear(); App.navigate('home'); showToast('Signed out successfully', 'info');"><span class="hdr-avatar">${user.name.charAt(0).toUpperCase()}</span><span class="hide-md">Sign out</span></button>`
+                        : `<button class="hdr-btn hide-sm" onclick="AuthDrawer.open('login')">Sign in</button>`}
+                    <button class="hdr-burger" aria-label="Open menu" onclick="MenuOverlay.open()"><i></i><i></i></button>
                 </div>
-            `;
-        }
-        return `
-            <div class="navbar-links">
-                <span class="navbar-link ${App.currentPage === 'dashboard' ? 'active' : ''}" onclick="App.navigate('dashboard')">Home</span>
-                <span class="navbar-link ${App.currentPage === 'restaurants' ? 'active' : ''}" onclick="App.navigate('restaurants')">Kitchens</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px">
-                <div class="cart-badge" onclick="App.navigate('cart')" id="cart-nav-badge">
-                    <span class="cart-icon">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-                    </span>
-                    <span>Cart</span>
-                    ${cartCount > 0 ? `<span class="count">${cartCount}</span>` : ''}
-                </div>
-                <div class="navbar-user" onclick="Session.clear(); Cart.clear(); App.navigate('home'); showToast('Signed out successfully', 'info');" title="Click to Sign Out">
-                    <div class="user-avatar">${user.name.charAt(0).toUpperCase()}</div>
-                    <span class="user-name">${user.name}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                </div>
-            </div>
-        `;
+            </div>`;
+        Motion.onScroll();
     },
 
     updateCartBadge() {
         const badge = document.getElementById('cart-nav-badge');
         if (!badge) return;
         const count = Cart.getCount();
-        const countEl = badge.querySelector('.count');
+        let el = badge.querySelector('.count');
         if (count > 0) {
-            if (countEl) {
-                countEl.textContent = count;
-            } else {
-                badge.insertAdjacentHTML('beforeend', `<span class="count">${count}</span>`);
-            }
-        } else if (countEl) {
-            countEl.remove();
-        }
+            if (!el) { badge.insertAdjacentHTML('beforeend', `<span class="count">${count}</span>`); el = badge.querySelector('.count'); }
+            el.textContent = count;
+        } else if (el) el.remove();
+    }
+};
+
+const MenuOverlay = {
+    open() {
+        const el = document.getElementById('menu-overlay');
+        const user = Session.getUser();
+        const items = Navbar.links().map(([r, t]) => [`App.navigate('${r}')`, t]);
+        if (Session.isLoggedIn() && !Session.isOwner()) items.push(["App.navigate('cart')", 'Your Order']);
+        items.push(user ? ["Session.clear(); Cart.clear(); App.navigate('home'); showToast('Signed out successfully','info')", 'Sign out'] : ["MenuOverlay.close(); AuthDrawer.open('login')", 'Sign in']);
+        el.innerHTML = `
+            <div class="menu-top">
+                <div class="hdr-brand"><span class="hdr-emblem">${EMBLEM}</span><span class="hdr-wordmark">Elysian Delicacies</span></div>
+                <button class="menu-close" onclick="MenuOverlay.close()">Close ${ICON_CLOSE}</button>
+            </div>
+            <div class="menu-body">
+                <nav class="menu-nav">${items.map(([fn, t], i) => `<span onclick="${fn}"><b style="--i:${i}">${t}</b></span>`).join('')}</nav>
+                <aside class="menu-side">
+                    <div><h5>Neighbourhoods</h5>${['Gulshan', 'Banani', 'Dhanmondi', 'Uttara', 'Mirpur'].map(a => `<a style="cursor:pointer;display:block" onclick="App.navigate('restaurants/${a}')">${a}</a>`).join('')}</div>
+                    <div><h5>Customer care</h5>9:00 AM – 11:30 PM<br>support@elysiandelicacies.com</div>
+                </aside>
+            </div>`;
+        Overlays.lock(true);
+        requestAnimationFrame(() => el.classList.add('open'));
+    },
+    close() { document.getElementById('menu-overlay').classList.remove('open'); Overlays.lock(false); }
+};
+
+const SearchOverlay = {
+    timer: null,
+    open() {
+        const el = document.getElementById('search-overlay');
+        const cuisines = Object.keys(CUISINE_PHOTOS_LIST());
+        el.innerHTML = `
+            <div class="search-sheet" onclick="event.stopPropagation()">
+                <div class="search-sheet-in">
+                    <div class="search-row">
+                        ${ICON_SEARCH}
+                        <input id="so-input" type="text" placeholder="Search kitchens, cuisines, dishes" autocomplete="off" oninput="SearchOverlay.type(this.value)" onkeydown="if(event.key==='Enter')SearchOverlay.submit(this.value)">
+                        <button aria-label="Close search" onclick="SearchOverlay.close()">${ICON_CLOSE}</button>
+                    </div>
+                    <div class="search-suggest" id="so-body">${this.suggestions(cuisines)}</div>
+                </div>
+            </div>`;
+        el.onclick = () => this.close();
+        Overlays.lock(true);
+        requestAnimationFrame(() => { el.classList.add('open'); setTimeout(() => document.getElementById('so-input')?.focus(), 350); });
+    },
+    suggestions(cuisines) {
+        return `<h6>Cuisines</h6>${cuisines.map(c => `<span class="chip" onclick="SearchOverlay.go('restaurants/all/${c}')">${c}</span>`).join('')}
+                <h6>Neighbourhoods</h6>${['Gulshan', 'Banani', 'Dhanmondi', 'Uttara', 'Mirpur'].map(a => `<span class="chip" onclick="SearchOverlay.go('restaurants/${a}')">${a}</span>`).join('')}`;
+    },
+    go(route) { this.close(); App.navigate(route); },
+    submit(q) { if (!q.trim()) return; RestaurantListPage.pendingSearch = q.trim(); this.close(); App.navigate('restaurants'); },
+    type(q) {
+        clearTimeout(this.timer);
+        const body = document.getElementById('so-body');
+        if (!q.trim()) { body.innerHTML = this.suggestions(Object.keys(CUISINE_PHOTOS_LIST())); return; }
+        this.timer = setTimeout(async () => {
+            try {
+                const data = await API.getRestaurants({ search: q.trim() });
+                const list = data.restaurants || [];
+                body.innerHTML = list.length
+                    ? list.map(r => `<div class="search-hit" onclick="SearchOverlay.go('restaurant/${r.id}')"><img src="${restaurantPhoto(r)}" alt=""><div><h4>${r.name}</h4><p>${r.cuisineType} · ${r.address ? r.address.area : 'Dhaka'}</p></div></div>`).join('')
+                    : `<p style="color:var(--ink-muted);padding:18px 0">No kitchens match “${q.replace(/</g, '&lt;')}”.</p>`;
+            } catch (e) { body.innerHTML = `<p style="padding:18px 0">${e.message}</p>`; }
+        }, 220);
+    },
+    close() { document.getElementById('search-overlay').classList.remove('open'); Overlays.lock(false); }
+};
+
+function CUISINE_PHOTOS_LIST() {
+    return { Bengali: 1, Italian: 1, Chinese: 1, American: 1, Japanese: 1, Indian: 1, Thai: 1, Mexican: 1, Mediterranean: 1 };
+}
+
+const AuthDrawer = {
+    open(tab = 'login') {
+        HomePage.activeTab = tab;
+        const el = document.getElementById('auth-drawer');
+        el.innerHTML = `
+            <div class="drawer" onclick="event.stopPropagation()">
+                <button class="drawer-close" aria-label="Close" onclick="AuthDrawer.close()">${ICON_CLOSE}</button>
+                <div class="auth-header"><span class="eyebrow">Welcome</span><h3>Join the table</h3><p>Sign in to order, or manage your kitchen.</p></div>
+                <div class="auth-tabs">
+                    <div class="auth-tab ${tab === 'login' ? 'active' : ''}" onclick="HomePage.switchTab(event, 'login')">Sign in</div>
+                    <div class="auth-tab ${tab === 'register' ? 'active' : ''}" onclick="HomePage.switchTab(event, 'register')">New account</div>
+                </div>
+                <div id="auth-form-content">${tab === 'login' ? HomePage.loginForm() : HomePage.registerForm()}</div>
+            </div>`;
+        el.onclick = () => this.close();
+        Overlays.closeAll(true);
+        Overlays.lock(true);
+        requestAnimationFrame(() => el.classList.add('open'));
+    },
+    close() { document.getElementById('auth-drawer').classList.remove('open'); Overlays.lock(false); }
+};
+
+const Overlays = {
+    init() {
+        document.body.insertAdjacentHTML('beforeend', '<div id="menu-overlay" class="menu-overlay"></div><div id="search-overlay" class="search-overlay"></div><div id="auth-drawer" class="drawer-backdrop"></div>');
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') this.closeAll(); });
+    },
+    lock(on) { document.body.classList.toggle('no-scroll', on); Motion.onScroll(); },
+    closeAll(keepLock) {
+        ['menu-overlay', 'search-overlay', 'auth-drawer'].forEach(id => document.getElementById(id)?.classList.remove('open'));
+        if (!keepLock) this.lock(false);
     }
 };

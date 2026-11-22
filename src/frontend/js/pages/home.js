@@ -1,82 +1,141 @@
 const HomePage = {
     activeTab: 'login',
+    slideTimer: null,
+    HERO: [
+        'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=2000&q=80',
+        'https://images.unsplash.com/photo-1579684947550-22e945225d9a?auto=format&fit=crop&w=2000&q=80',
+        'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=2000&q=80'
+    ],
+    HOODS: [
+        ['Gulshan', 'Chinese'], ['Banani', 'Bengali'], ['Dhanmondi', 'American'], ['Uttara', 'Italian'], ['Mirpur', 'Thai']
+    ],
 
     render() {
         const main = document.getElementById('main-content');
+        const cuisines = Object.keys(CUISINE_PHOTOS_LIST());
+        const arrow = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>';
+        const big = (u, w) => u.replace(/w=\d+/, 'w=' + w);
+
         main.innerHTML = `
-            <div class="hero-editorial">
-                <div class="container hero-editorial-grid">
-                    <div>
-                        <div class="hero-kicker">Dhaka's Curated Dining Collective</div>
-                        <h1>Exceptional meals from neighborhood kitchens, <span class="em-serif">delivered fresh</span></h1>
-                        <p class="hero-lead">From heritage kacchi biryanis in Banani to wood-fired artisan sourdough in Uttara — experience thoughtful cooking delivered promptly to your home.</p>
-                        
-                        <div class="hero-proof-strip">
-                            <div class="proof-item">
-                                <span class="proof-number">28 min</span>
-                                <span class="proof-label">Average delivery</span>
-                            </div>
-                            <div class="proof-item">
-                                <span class="proof-number">4.8 / 5</span>
-                                <span class="proof-label">Kitchen review score</span>
-                            </div>
-                            <div class="proof-item">
-                                <span class="proof-number">100%</span>
-                                <span class="proof-label">Inspected packaging</span>
-                            </div>
-                        </div>
+            <section class="hero" id="hero">
+                ${this.HERO.map((u, i) => `<div class="hero-slide ${i === 0 ? 'on' : ''}"><img src="${u}" alt=""></div>`).join('')}
+                <div class="container hero-content">
+                    <span class="eyebrow">The Dhaka guide to independent kitchens</span>
+                    <h1><span class="mask-line" style="--i:0"><span>Where Dhaka’s</span></span><span class="mask-line" style="--i:1"><span>finest kitchens</span></span><span class="mask-line" style="--i:2"><span><em>meet your table.</em></span></span></h1>
+                    <p class="hero-lead" data-reveal style="--i:4">From heritage kacchi biryanis in Banani to wood-fired sourdough in Uttara, thoughtful cooking delivered promptly to your door.</p>
+                    <form class="finder" data-reveal style="--i:5" onsubmit="HomePage.find(event)">
+                        <label><span>Cuisine</span><select id="f-cuisine"><option value="all">All cuisines</option>${cuisines.map(c => `<option>${c}</option>`).join('')}</select></label>
+                        <label><span>Neighbourhood</span><select id="f-area"><option value="all">Anywhere in Dhaka</option>${this.HOODS.map(h => `<option>${h[0]}</option>`).join('')}</select></label>
+                        <button type="submit">Find a kitchen</button>
+                    </form>
+                    <div class="hero-foot">
+                        <div class="hero-dots">${this.HERO.map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('')}</div>
+                        <div class="scroll-cue">Scroll</div>
                     </div>
+                </div>
+            </section>
 
+            <section class="block">
+                <div class="container intro-grid">
+                    <p class="intro-text" data-reveal>Every kitchen in our collection is independent, <em>owner-led</em> and chosen for its point of view. We simply make sure the food arrives the way the chef intended.</p>
+                    <div class="facts">
+                        <div class="fact" data-reveal style="--i:1"><b data-count="28" data-suffix=" min">0</b><span>Average delivery</span></div>
+                        <div class="fact" data-reveal style="--i:2"><b data-count="4.8" data-suffix=" / 5">0</b><span>Kitchen review score</span></div>
+                        <div class="fact" data-reveal style="--i:3"><b data-count="100" data-suffix="%">0</b><span>Inspected packaging</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="block soft" style="padding-left:0;padding-right:0">
+                <div class="container block-head">
+                    <div data-reveal><span class="eyebrow">Our selection</span><h2 class="section-heading-editorial">Kitchens worth ordering from</h2></div>
+                    <div class="arrows" data-reveal>
+                        <button class="arrow-btn" id="rail-prev" aria-label="Previous" onclick="HomePage.rail(-1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="20" y1="12" x2="4" y2="12"/><polyline points="10 6 4 12 10 18"/></svg></button>
+                        <button class="arrow-btn" id="rail-next" aria-label="Next" onclick="HomePage.rail(1)">${arrow}</button>
+                    </div>
+                </div>
+                <div class="rail" id="featured-rail">${[1, 2, 3].map(() => '<div class="rc"><div class="rc-media skeleton"></div><div class="rc-body"><div class="skeleton" style="height:18px;width:60%"></div></div></div>').join('')}</div>
+                <div class="container"><div class="rail-progress"><i id="rail-bar"></i></div></div>
+            </section>
+
+            <section class="block">
+                <div class="container">
+                    <div class="block-head"><div data-reveal><span class="eyebrow">Explore</span><h2 class="section-heading-editorial">By neighbourhood</h2></div>
+                    <a class="clear-link" style="font-size:.8rem" onclick="App.navigate('restaurants')" data-reveal>View all kitchens</a></div>
+                    <div class="hoods">
+                        ${this.HOODS.map(([a, c], i) => `<div class="hood" data-reveal style="--i:${i}" onclick="App.navigate('restaurants/${a}')"><img src="${big(getCuisinePhoto(c), 700)}" alt="${a}" loading="lazy"><div class="hood-info"><h3>${a}</h3><span>Explore ${arrow}</span></div></div>`).join('')}
+                    </div>
+                </div>
+            </section>
+
+            <section class="block soft">
+                <div class="container split">
+                    <div class="split-media" data-reveal="fade"><img data-parallax src="${big(getCuisinePhoto('Japanese'), 1100)}" alt="Chef plating a dish" loading="lazy"></div>
                     <div>
-                        <div class="auth-panel">
-                            <div class="auth-header">
-                                <h3>Welcome to Elysian</h3>
-                                <p>Sign in to order or manage your kitchen</p>
-                            </div>
-                            <div class="auth-tabs">
-                                <div class="auth-tab ${this.activeTab === 'login' ? 'active' : ''}" onclick="HomePage.switchTab(event, 'login')">Customer / Owner Sign In</div>
-                                <div class="auth-tab ${this.activeTab === 'register' ? 'active' : ''}" onclick="HomePage.switchTab(event, 'register')">New Account</div>
-                            </div>
-                            <div id="auth-form-content">
-                                ${this.activeTab === 'login' ? this.loginForm() : this.registerForm()}
-                            </div>
+                        <span class="eyebrow" data-reveal>The Elysian difference</span>
+                        <h2 class="section-heading-editorial" data-reveal style="--i:1">Craft, transparency and care in every order</h2>
+                        <div class="principles">
+                            <div class="principle" data-reveal><span>01</span><div><h4>Neighbourhood roots</h4><p>We work only with established kitchens in Gulshan, Banani, Dhanmondi, Uttara and Mirpur, each known for a distinct culinary identity.</p></div></div>
+                            <div class="principle" data-reveal><span>02</span><div><h4>A dedicated courier fleet</h4><p>Insulated thermal carriers and direct dispatch keep curries piping hot and crusts wonderfully crisp on arrival.</p></div></div>
+                            <div class="principle" data-reveal><span>03</span><div><h4>Honest pricing</h4><p>Menu prices come straight from the restaurant, with clear delivery tiers, seasonal vouchers and no hidden service mark-ups.</p></div></div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="container curated-story-section">
-                <div class="section-eyebrow">The Elysian Difference</div>
-                <h2 class="section-heading-editorial">Craft, transparency, and care in every order</h2>
-                <p class="section-desc-editorial">We work directly with passionate chefs and family-owned restaurants who never compromise on ingredients or culinary craft.</p>
-
-                <div class="story-grid">
-                    <div class="story-card">
-                        <div class="story-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </div>
-                        <h4>Neighborhood Roots</h4>
-                        <p>We source exclusively from established culinary kitchens in Gulshan, Banani, Dhanmondi, and Uttara known for distinct culinary identity.</p>
-                    </div>
-
-                    <div class="story-card">
-                        <div class="story-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        </div>
-                        <h4>Dedicated Courier Fleet</h4>
-                        <p>Insulated thermal carriers and direct dispatch ensure curries remain piping hot and crispy crusts stay wonderfully crisp upon arrival.</p>
-                    </div>
-
-                    <div class="story-card">
-                        <div class="story-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                        </div>
-                        <h4>Honest Pricing</h4>
-                        <p>Direct menu pricing from restaurant owners with clear delivery tiers, seasonal vouchers, and no hidden service markups.</p>
-                    </div>
+            <section class="cta-band">
+                <div class="container">
+                    <span class="eyebrow" data-reveal>For kitchen owners</span>
+                    <h2 data-reveal style="--i:1">Run a kitchen in Dhaka? Join the guide.</h2>
+                    <button class="btn btn-outline" data-reveal style="--i:2" onclick="App.navigate('register-restaurant')">Add your restaurant</button>
                 </div>
-            </div>
-        `;
+            </section>`;
+
+        this.startSlides();
+        this.loadFeatured();
+        const rail = document.getElementById('featured-rail');
+        rail.addEventListener('scroll', () => this.railState(), { passive: true });
+    },
+
+    startSlides() {
+        clearInterval(this.slideTimer);
+        let i = 0;
+        const next = () => {
+            const slides = document.querySelectorAll('.hero-slide');
+            if (!slides.length) return clearInterval(this.slideTimer);
+            const dots = document.querySelectorAll('.hero-dots i');
+            slides[i].classList.remove('on'); dots[i].classList.remove('on');
+            i = (i + 1) % slides.length;
+            slides[i].classList.add('on'); void dots[i].offsetWidth; dots[i].classList.add('on');
+        };
+        this.slideTimer = setInterval(next, 6000);
+    },
+
+    async loadFeatured() {
+        try {
+            const data = await API.getRestaurants({ sortBy: 'rating' });
+            const rail = document.getElementById('featured-rail');
+            if (!rail) return;
+            rail.innerHTML = (data.restaurants || []).slice(0, 8).map((r, i) => renderRestaurantCard(r, i)).join('');
+            this.railState();
+        } catch (err) { showToast(err.message, 'error'); }
+    },
+
+    rail(dir) { const r = document.getElementById('featured-rail'); if (r) r.scrollBy({ left: dir * (r.clientWidth * 0.6), behavior: 'smooth' }); },
+    railState() {
+        const r = document.getElementById('featured-rail'), bar = document.getElementById('rail-bar');
+        if (!r || !bar) return;
+        const max = r.scrollWidth - r.clientWidth, w = Math.min(100, (r.clientWidth / r.scrollWidth) * 100);
+        bar.style.width = w + '%';
+        bar.style.left = (max > 0 ? (r.scrollLeft / max) * (100 - w) : 0) + '%';
+        document.getElementById('rail-prev').disabled = r.scrollLeft < 4;
+        document.getElementById('rail-next').disabled = r.scrollLeft > max - 4;
+    },
+
+    find(e) {
+        e.preventDefault();
+        const area = document.getElementById('f-area').value, cuisine = document.getElementById('f-cuisine').value;
+        App.navigate(`restaurants/${encodeURIComponent(area)}/${encodeURIComponent(cuisine)}`);
     },
 
     switchTab(event, tab) {
@@ -177,6 +236,7 @@ const HomePage = {
             const password = document.getElementById('login-password').value;
             const result = await API.login(email, password);
             Session.setUser(result.user);
+            AuthDrawer.close();
             showToast(`Welcome back, ${result.user.name}`, 'success');
 
             if (result.user.role === 'RESTAURANT_OWNER') {
@@ -215,6 +275,7 @@ const HomePage = {
 
             const result = await API.register(data);
             Session.setUser(result.user);
+            AuthDrawer.close();
             showToast('Account registered successfully', 'success');
 
             if (result.user.role === 'RESTAURANT_OWNER') {
