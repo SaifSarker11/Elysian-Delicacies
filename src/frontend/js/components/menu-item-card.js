@@ -10,7 +10,7 @@ function renderMenuItemCard(item, showAddButton = true) {
     return `
         <div class="menu-item-card ${!item.available ? 'unavailable' : ''}">
             <div class="item-thumb">
-                <img src="${photoUrl}" alt="${item.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80'">
+                <img src="${photoUrl}" alt="${item.name}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80'">
             </div>
             <div class="item-info">
                 <div class="item-name">${item.name}</div>

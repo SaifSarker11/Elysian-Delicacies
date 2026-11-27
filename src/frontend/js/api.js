@@ -263,9 +263,40 @@ function getCuisinePhoto(cuisine) {
     return CUISINE_PHOTOS[cuisine] || CUISINE_PHOTOS['default'];
 }
 
+// Exact photo for every seeded dish (matched by name, so each image shows the actual dish)
+const MENU_ITEM_PHOTOS = {
+    'kacchi biriyani': '/images/menu/m001.jpg',
+    'chicken reshmi kebab': '/images/menu/m002.jpg',
+    'mutton curry': '/images/menu/m003.jpg',
+    'firni': '/images/menu/m004.jpg',
+    'mango lassi': '/images/menu/m005.jpg',
+    'margherita pizza': '/images/menu/m006.jpg',
+    'pepperoni feast': '/images/menu/m007.jpg',
+    'garlic bread': '/images/menu/m008.jpg',
+    'pasta alfredo': '/images/menu/m009.jpg',
+    'tiramisu': '/images/menu/m010.jpg',
+    'chicken fried rice': '/images/menu/m011.jpg',
+    'dim sum platter': '/images/menu/m012.jpg',
+    'kung pao chicken': '/images/menu/m013.jpg',
+    'thai green curry': '/images/menu/m014.jpg',
+    'mango sticky rice': '/images/menu/m015.jpg',
+    'classic smash burger': '/images/menu/m016.jpg',
+    'loaded fries': '/images/menu/m017.jpg',
+    'bbq chicken burger': '/images/menu/m018.jpg',
+    'oreo milkshake': '/images/menu/m019.jpg',
+    'chicken wings': '/images/menu/m020.jpg',
+    'california roll': '/images/menu/m021.jpg',
+    'salmon sashimi': '/images/menu/m022.jpg',
+    'tempura platter': '/images/menu/m023.jpg',
+    'ramen bowl': '/images/menu/m024.jpg',
+    'matcha ice cream': '/images/menu/m025.jpg',
+};
+
 function getFoodPhoto(category, itemName = '') {
+    const exact = MENU_ITEM_PHOTOS[(itemName || '').trim().toLowerCase()];
+    if (exact) return exact;
     const lower = (itemName + ' ' + category).toLowerCase();
-    if (lower.includes('biryani') || lower.includes('biriyani') || lower.includes('rice') || lower.includes('kacchi')) {
+    if (lower.includes('biryani') || lower.includes('biriyani') || lower.includes('kacchi') || (lower.includes('rice') && !lower.includes('sticky') && !lower.includes('fried'))) {
         return 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=400&q=80';
     }
     if (lower.includes('kebab') || lower.includes('grill') || lower.includes('meat') || lower.includes('curry')) {
